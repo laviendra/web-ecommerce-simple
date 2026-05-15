@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="transaksi.js"></script>
+</head>
+<style>
+    /* Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f6f1;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #6c5ce7;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+        height: 50px;
+        width: auto;
+    }
+
+    header nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    header nav ul li {
+        margin-left: 20px;
+    }
+
+    header nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+        color: #dfe6e9;
+    }
+
+    main {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #6c5ce7;
+        margin-bottom: 1rem;
+    }
+
+    form {
+        width: 100%;
+        max-width: 600px;
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form .form-group {
+        margin-bottom: 1rem;
+    }
+
+    form label {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    form input {
+        width: 95%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;  
+    }
+    
+    form select, form button {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    form input:focus, form select:focus {
+        border-color: #6c5ce7;
+        outline: none;
+    }
+
+    form button {
+        background-color: #6c5ce7;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    form button:hover {
+        background-color: #5a47c1;
+    }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        margin-top: 2rem;
+        border-collapse: collapse;
+        text-align: left;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #6c5ce7;
+        color: white;
+    }
+
+    table td {
+        color: #555;
+    }
+
+    footer {
+        background-color: #2d3436;
+        color: #dfe6e9;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: auto;
+    }
+</style>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Logo Toko Baju" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="keranjang.html">Keranjang</a></li>
+                <li><a href="transaksi.html">Transaksi</a></li>
+                <li><a href="login.html">Keluar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <main>
+        <h1>Transaksi</h1>
+        <form id="transaction-form">
+            <div class="form-group">
+                <label for="transaction-name">Nama Barang</label>
+                <select id="transaction-name" required>
+                    <option value="">Pilih Barang</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="transaction-amount">Jumlah</label>
+                <input type="number" id="transaction-amount" required>
+            </div>
+            <div class="form-group">
+                <label for="transaction-price">Harga Satuan</label>
+                <input type="number" id="transaction-price" readonly>
+            </div>
+            <div class="form-group">
+                <label for="transaction-category">Kategori</label>
+                <select id="transaction-category" required>
+                    <option value="Pemasukan">Pemasukan</option>
+                    <option value="Pengeluaran">Pengeluaran</option>
+                </select>
+            </div>
+            <button type="submit">Tambah Transaksi</button>
+        </form>
+
+        <h2>Daftar Transaksi</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Jumlah</th>
+                    <th>Harga Satuan</th>
+                    <th>Total</th>
+                    <th>Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-list">
+                <!-- Transaksi akan dimuat di sini -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Rafli Praditta. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        // Data barang
+        const products = [
+            { id: 1, name: "Baju Kemeja Pria", price: 150000 },
+            { id: 2, name: "Baju Wanita Casual", price: 120000 },
+            { id: 3, name: "Baju Pria Retro", price: 100000 },
+            { id: 4, name: "Baju Wanita Korean", price: 110000 },
+            { id: 5, name: "Baju Oversized", price: 80000 },
+            { id: 6, name: "Baju Kemeja Wanita", price: 140000 },
+        ];
+
+        // Ambil elemen
+        const transactionForm = document.getElementById('transaction-form');
+        const transactionName = document.getElementById('transaction-name');
+        const transactionPrice = document.getElementById('transaction-price');
+        const transactionList = document.getElementById('transaction-list');
+
+        // Isi dropdown nama barang
+        products.forEach(product => {
+            const option = document.createElement('option');
+            option.value = product.name;
+            option.textContent = product.name;
+            option.dataset.price = product.price;
+            transactionName.appendChild(option);
+        });
+
+        // Update harga otomatis saat memilih barang
+        transactionName.addEventListener('change', function() {
+            const selectedOption = transactionName.options[transactionName.selectedIndex];
+            transactionPrice.value = selectedOption.dataset.price || '';
+        });
+
+        // Array untuk menyimpan transaksi
+        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+        // Fungsi untuk menampilkan transaksi
+        function renderTransactions() {
+            transactionList.innerHTML = '';
+            transactions.forEach((transaction, index) => {
+                const total = transaction.amount * transaction.price;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.name}</td>
+                    <td>${transaction.amount}</td>
+                    <td>Rp ${Number(transaction.price).toLocaleString()}</td>
+                    <td>Rp ${Number(total).toLocaleString()}</td>
+                    <td>${transaction.category}</td>
+                    <td><button class="delete-button" data-index="${index}">Hapus</button></td>
+                `;
+                transactionList.appendChild(row);
+            });
+
+            // Tambahkan event listener untuk tombol hapus
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', deleteTransaction);
+            });
+        }
+
+        // Fungsi untuk menambahkan transaksi
+        transactionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = transactionName.value;
+            const amount = document.getElementById('transaction-amount').value;
+            const price = transactionPrice.value;
+            const category = document.getElementById('transaction-category').value;
+
+            transactions.push({ name, amount, price, category });
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            renderTransactions();
+            transactionForm.reset();
+        });
+
+        // Fungsi untuk menghapus transaksi
+        function deleteTransaction(event) {
+            const index = event.target.dataset.index;
+            transactions.splice(index, 1);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            renderTransactions();
+        }
+
+        // Tampilkan transaksi saat halaman dimuat
+        renderTransactions();
+    </script>
+</body>
+</html>

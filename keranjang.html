@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="keranjang.js"></script>
+</head>
+<style>
+    /* Modern Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f6f1;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #6c5ce7;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+        height: 50px;
+        width: auto;
+    }
+
+    header nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    header nav ul li {
+        margin-left: 20px;
+    }
+
+    header nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+        color: #dfe6e9;
+    }
+
+    main {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #6c5ce7;
+        margin-bottom: 1rem;
+    }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        margin-top: 2rem;
+        border-collapse: collapse;
+        text-align: left;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #6c5ce7;
+        color: white;
+    }
+
+    table td {
+        color: #555;
+    }
+
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .delete-button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-button:hover {
+        background-color: #c0392b;
+    }
+
+    .total-payment {
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
+        color: #6c5ce7;
+        font-weight: bold;
+    }
+
+    footer {
+        background-color: #2d3436;
+        color: #dfe6e9;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: auto;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        header nav ul {
+            flex-direction: column;
+            margin-top: 1rem;
+        }
+
+        header nav ul li {
+            margin-left: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            margin: 1rem 0;
+        }
+    }
+</style>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Logo Toko Baju" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="keranjang.html">Keranjang</a></li>
+                <li><a href="transaksi.html">Transaksi</a></li>
+                <li><a href="login.html">Keluar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <main>
+        <h1>Keranjang Anda</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Produk akan dimuat di sini -->
+            </tbody>
+        </table>
+
+        <div class="total-payment">
+            Total Pembayaran: Rp <span id="total-price">0</span>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Rafli Praditta. Semua Hak Dilindungi.</p>
+    </footer>
+</body>
+</html>
+
+<script>
+    // Ambil elemen tabel dan total pembayaran
+const cartItems = document.getElementById('cart-items');
+const totalPriceElement = document.getElementById('total-price');
+
+// Ambil keranjang dari localStorage
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Variabel untuk menghitung total
+let totalPrice = 0;
+
+// Muat produk ke tabel
+cart.forEach((product, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${product.name}</td>
+        <td>Rp ${Number(product.price).toLocaleString()}</td>
+        <td><button class="delete-button" data-index="${index}">Hapus</button></td>
+    `;
+    cartItems.appendChild(row);
+
+    // Tambahkan harga produk ke total
+    totalPrice += Number(product.price);
+});
+
+// Update total pembayaran
+totalPriceElement.textContent = totalPrice.toLocaleString();
+
+// Fungsi untuk menghapus produk
+function deleteProduct(event) {
+    const index = event.target.dataset.index;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Hapus produk dari keranjang
+    cart.splice(index, 1);
+    
+    // Simpan kembali ke localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Muat ulang halaman untuk menampilkan produk yang sudah dihapus
+    location.reload();
+}
+
+// Menambahkan event listener untuk tombol hapus
+const deleteButtons = document.querySelectorAll('.delete-button');
+deleteButtons.forEach(button => button.addEventListener('click', deleteProduct));
+</script>

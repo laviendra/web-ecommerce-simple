@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Toko Baju</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f6f1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #6c5ce7;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #dfe6e9;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .card-header {
+            height: 300px;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h1 {
+            margin: 0 0 10px;
+            font-size: 2.5rem;
+            color: #a29bfe;
+        }
+
+        .card-content p {
+            margin: 0 0 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card-actions a {
+            background: #6c5ce7;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                flex-direction: column;
+            }
+
+            .card-header {
+                height: 200px;
+            }
+        }
+
+        footer {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+
+            header nav ul li {
+                margin-left: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Logo Toko Baju" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="keranjang.html">Keranjang</a></li>
+                <li><a href="transaksi.html">Transaksi</a></li>
+                <li><a href="login.html">Keluar</a></li>
+            </ul>
+        </nav>
+    </header>    
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <img src="toko-modern.jpg" alt="Tampilan Toko Modern">
+            </div>
+            <div class="card-content">
+                <h1>Toko Radts</h1>
+                <p>Toko Radts adalah destinasi belanja fashion dengan koleksi modern dan stylish untuk pria dan wanita. Kami berkomitmen memberikan pengalaman belanja yang terbaik, didukung produk berkualitas dan layanan prima.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Rafli Praditta. Semua Hak Dilindungi.</p>
+    </footer>
+</body>
+</html>
