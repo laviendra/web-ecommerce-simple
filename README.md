@@ -1,6 +1,6 @@
 # Simple E-Commerce Website
 
-A simple fashion e-commerce website project created for a Semester 3 midterm assignment.
+A simple fashion e-commerce website project created for a Semester 2 midterm assignment.
 
 This website was built using HTML, CSS, and JavaScript with a focus on frontend layout and basic shopping features.
 
